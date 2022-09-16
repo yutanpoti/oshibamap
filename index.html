@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>現在位置を表示</title>
+  <title>大芝マップTest</title>
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.0/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.3.0/dist/leaflet.js"></script>
@@ -18,7 +18,7 @@
 	    // リアルタイム監視を停止
 	    window.navigator.geolocation.clearWatch(watch_id);
 	    watch_id = 0;                    // 監視識別IDに0をセット
-	    button.textContent = "測定開始"; // ボタン表記を変更
+	    button.textContent = "現在地"; // ボタン表記を変更
 	  } else {
 	    var p_options = {                // リアルタイム監視を開始
 	      enableHighAccuracy: true,    // 高精度を要求する
@@ -27,7 +27,7 @@
 	    };
             watch_id = window.navigator.geolocation.watchPosition(monitor,error,p_options); 
 	    // ボタン表記を変更
-	    button.textContent = "測定停止";
+	    button.textContent = "現在地停止";
 	  }
       };  // getPosi2()  --------------- 
  
@@ -55,7 +55,7 @@
  
       function init() {
         mapobj = L.map('mapDiv', { zoomControl:true });
-        mapobj.setView([35.360631,138.727307], 13);  //図中心 富士山
+        mapobj.setView([35.8844849, 137.9433395], 18);  //図中心 大芝高原
         L.control.scale({maxWidth:200,position:'bottomleft',imperial:false}).addTo(mapobj);  // 右下にスケールを表示
         var gsiattr = "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>国土地理院</a>";
         var gsi = L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', { attribution: gsiattr });
