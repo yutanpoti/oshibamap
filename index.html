@@ -55,7 +55,7 @@
  
       function init() {
         mapobj = L.map('mapDiv', { zoomControl:true });
-        mapobj.setView([35.8844849, 137.9433395], 18);  //図中心 大芝高原
+        mapobj.setView([35.8844849, 137.9433395], 15);  //図中心 大芝高原
         L.control.scale({maxWidth:200,position:'bottomleft',imperial:false}).addTo(mapobj);  // 右下にスケールを表示
         var gsiattr = "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>国土地理院</a>";
         var gsi = L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', { attribution: gsiattr });
