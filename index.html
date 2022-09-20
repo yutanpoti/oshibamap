@@ -58,7 +58,7 @@
       gsi.addTo(map);
 
 
-      //Goejsonをマップに追加
+      //Goejsonをマップに追加（ひとまず成功しているが、Objectの切り替えやラベル表示したい）
       // 外部のGeoJSONファイルを取得する
       fetch("theta.geojson")
      .then(response => response.json())
@@ -67,6 +67,18 @@
       L.geoJSON(data).addTo(map);
       });
 
+      //ライン、ポリゴンも
+      fetch("hodou.geojson")
+     .then(response => response.json())
+      .then(data => {
+      L.geoJSON(data).addTo(map);
+      });
+
+      fetch("segyouhan.geojson")
+     .then(response => response.json())
+      .then(data => {
+      L.geoJSON(data).addTo(map);
+      });
     }
   
     //ホーム（大芝へ）
