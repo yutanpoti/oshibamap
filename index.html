@@ -4,7 +4,7 @@
  
 <head>
   <meta charset="UTF-8">
-  <title>大芝マップ6</title>
+  <title>大芝マップ</title>
   <!-- ●表示幅を指定● -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- ●headタグ内にLeafletのcssとJavaScriptを指定● -->
@@ -56,43 +56,55 @@
 	    */
       L.control.layers(baseMaps/*, overlayMaps*/).addTo(map);
       gsi.addTo(map);
+
+
+      //Goejsonをマップに追加
+      // 外部のGeoJSONファイルを取得する
+      fetch("theta.geojson")
+     .then(response => response.json())
+      // GeoJSONを地図に追加する
+      .then(data => {
+      L.geoJSON(data).addTo(map);
+      });
+
     }
   
+    //ホーム（大芝へ）
+    function gohome(){
+      map.setView([35.8844849, 137.9433395], 15); //大芝の座標
+    }
+
 
     //現在地取得（あちあち情報局を参照）
     function currentPos(){
- 
-    //(1)APIに対応していないブラウザを排除
+     //(1)APIに対応していないブラウザを排除
     if (navigator.geolocation === false) {
       alert("位置情報を取得できません。ブラウザが対応していません。");
     }
-
     //(2)位置情報取得オプションを設定(後述)
     var options = {
       enableHighAccuracy: false,
       timeout: 5000,
       maximumAge: 0
     };
-
     //(3)取得成功時の動作設定
     function success(pos) {
         var lat=pos.coords.latitude; //緯度
         var lon=pos.coords.longitude; //経度
         map.setView([ lat,lon ]); //地図を移動
     }
-
     //(4)取得失敗時(タイムアウトなど)の動作設定
     function error(err) {
       alert("位置情報を取得できませんでした。デバイスに位置情報を取得できる装置が無い、または取得に時間がかかっている、またはデバイスやブラウザ設定でブロックされています");
     }
-
     //(5)コマンドを実行
     navigator.geolocation.getCurrentPosition(success, error, options);
     }
 
 
   </script>
-        
+      
+  <!-- 地図の中心に十字マークをつける -->      
   <style>
     .leaflet-control-container::after {
       content: url(https://maps.gsi.go.jp/image/map/crosshairs.png);
@@ -110,8 +122,9 @@
 <body onload="init()">
  <!-- ●タイトルと現在地ボタン● -->
   <div style="text-align:center;" >
-    <span style="font-size:20px;">大芝マップ6Test</span>
-    <button onClick="currentPos()">現在地に移動</button>
+    <span style="font-size:20px;">大芝マップ7Test</span>
+    <button onClick="currentPos()">現在地へ</button>
+    <button onClick="gohome()">大芝へ</button>
     </div>
   <!-- ●地図を表示● -->
   <div id="mapcontainer" style="position:absolute;top:35px;left:2px;right:2px;bottom:2px;"></div><!-- ここに地図を表示。隙間をあけて全画面。 -->
