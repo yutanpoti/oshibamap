@@ -4,7 +4,7 @@
  
 <head>
   <meta charset="UTF-8">
-  <title>大芝マップ4</title>
+  <title>大芝マップ5</title>
   <!-- ●表示幅を指定● -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- ●headタグ内にLeafletのcssとJavaScriptを指定● -->
@@ -57,8 +57,31 @@
       L.control.layers(baseMaps/*, overlayMaps*/).addTo(map);
       gsi.addTo(map);
     }
+    
+
+    //現在地表示KITANOTE参照
+    function setCurLocation(){
+        if (navigator.geolocation == false){
+          alert('現在地を取得できませんでした。');
+          return;
+        }
+ 
+        function success(e) {
+          var lat  = e.coords.latitude;
+          var lng = e.coords.longitude;
+          mymap.setView([lat, lng], 15);
+          L.marker([lat,lng]).addTo(mymap).bindPopup('現在地').openPopup();
+        };
+ 
+        function error() {
+          alert('現在地を取得できませんでした。');
+        };
+ 
+        navigator.geolocation.getCurrentPosition(success, error);
+      }
 
     //ここから現在地表示機能（色んな人のを参考に作成）
+    /*
     // 現在地ボタン
     function getPosi2() {
       var button = document.getElementById('button2');
@@ -100,18 +123,25 @@
       function drawMark( Pset ){
         marker= L.marker(Pset).addTo(mapobj).bindPopup(marktxt).openPopup();
       }; // drawMark( setP ) ------------------
+    */
 
   </script>
+
+ <style type="text/css">
+   #btnCurLocation { height:25px; width: 100px;}
+ </style>
+
 </head>
  
 <body onload="init()">
  <!-- ●タイトルと現在地ボタン● -->
   <div style="text-align:center;" >
-    <span style="font-size:20px;">大芝マップ4Test</span>
-    <button id="button2" onclick="getPosi2()">現在地</button>
+    <span style="font-size:20px;">大芝マップ5Test</span>
+    <button id="btnCurLocation" onClick="setCurLocation()">現在地表示</button>
+    <!--<button id="button2" onclick="getPosi2()">現在地</button>-->
     </div>
   <!-- ●地図を表示● -->
-  <div id="mapcontainer" style="position:absolute;top:30px;left:2px;right:2px;bottom:2px;"></div><!-- ここに地図を表示。隙間をあけて全画面。 -->
+  <div id="mapcontainer" style="position:absolute;top:35px;left:2px;right:2px;bottom:2px;"></div><!-- ここに地図を表示。隙間をあけて全画面。 -->
 </body>
  
 </html>
