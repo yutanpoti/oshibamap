@@ -92,6 +92,18 @@
 
   </script>
 
+  <style>
+    .leaflet-control-container::after {
+      content: url(https://maps.gsi.go.jp/image/map/crosshairs.png);
+      z-index: 1000;
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+
 </head>
  
 <body onload="init()">
