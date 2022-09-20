@@ -58,6 +58,7 @@
       gsi.addTo(map);
     }
   
+
     //現在地取得（あちあち情報局を参照）
     function currentPos(){
  
@@ -77,7 +78,7 @@
     function success(pos) {
         var lat=pos.coords.latitude; //緯度
         var lon=pos.coords.longitude; //経度
-        mymap.setView([ lat,lon ]); //地図を移動
+        map.setView([ lat,lon ]); //地図を移動
     }
 
     //(4)取得失敗時(タイムアウトなど)の動作設定
@@ -91,7 +92,7 @@
 
 
   </script>
-
+        
   <style>
     .leaflet-control-container::after {
       content: url(https://maps.gsi.go.jp/image/map/crosshairs.png);
