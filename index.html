@@ -34,7 +34,12 @@
 	    //長野県CS立体図（1m）
 	    var naganocsver2 = L.tileLayer('https://tile.geospatial.jp/CS/VER2/{z}/{x}/{y}.png', 
 	 	    { attribution: "<a href='https://www.geospatial.jp/ckan/dataset/nagano-csmap' target='_blank'>長野県CS立体図</a> contributors" });//長野県CS立体図（1m）
-	  	
+     //今昔マップ
+       var kjmapina00 = L.tileLayer('https://ktgis.net/kjmapw/kjtilemap/ina/00/{z}/{x}/{-y}.png', 
+	 	    { attribution: "<a href='https://ktgis.net/kjmapw/tilemapservice.html' target='_blank'>今昔マップon the web</a> contributors" });//今昔マップ伊那1911
+       var kjmapina01 = L.tileLayer('https://ktgis.net/kjmapw/kjtilemap/ina/01/{z}/{x}/{-y}.png', 
+	 	    { attribution: "<a href='https://ktgis.net/kjmapw/tilemapservice.html' target='_blank'>今昔マップon the web</a> contributors" });//今昔マップ伊那1951
+
       //オーバーレイ用のタイルレイヤ
       //opacityで透過度を設定、maxNativeZoomを指定すると、それ以上のズームレベルのタイルデータは、指定のズームレベルのタイル画像を拡大して表示される
       var gsirelief = L.tileLayer('http://cyberjapandata.gsi.go.jp/xyz/relief/{z}/{x}/{y}.png', { opacity: 0.7, maxNativeZoom: 15, attribution: gsiattr });
@@ -42,11 +47,13 @@
 
 	    //背景地図（重ね合わせなし）とオーバーレイマップ（重ねあわせあり）を指定する
       var baseMaps = {
-        "地理院淡色地図": gsipale,
-        "地理院航空写真（最新）": gsiphot,
-		    "地理院航空写真（1974-1978）": gsiphot1974,
-		    "地理院航空写真（1961-1969）": gsiphot1961,
-        "長野県CS立体図（1mタイル）": naganocsver2
+        "淡色地図": gsipale,
+        "航空写真（最新）": gsiphot,
+		    "航空写真（1974-1978）": gsiphot1974,
+		    "航空写真（1961-1969）": gsiphot1961,
+        "今昔マップ伊那1951": kjmapina01,
+        "今昔マップ伊那1911": kjmapina00,
+        "CS立体図（1mタイル）": naganocsver2
       };
 	     /* オーバーレイは一旦なしで
        var overlayMaps = {
