@@ -78,18 +78,22 @@
       });
 
       //ライン、ポリゴンも
+      */
       fetch("hodou.geojson")
      .then(response => response.json())
       .then(data => {
       L.geoJSON(data).addTo(map);
       });
 
-      */
+     /*
       fetch("segyouhan.geojson")
      .then(response => response.json())
       .then(data => {
       L.geoJSON(data).addTo(map);
       });
+      */
+
+
     }
   
     //ホーム（大芝へ）
