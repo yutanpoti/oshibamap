@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- ●ここからhtmlのhead● -->
+<!-- ***************ここからhtmlのhead**************** -->
 <html>
  
 <head>
@@ -17,11 +17,36 @@
 	integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
 	crossorigin=""></script>
 
+  <!-- Leaflet.DialogプラグインのcssとJavaScriptのCDN -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-dialog@1.0.5/Leaflet.Dialog.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/leaflet-dialog@1.0.5/Leaflet.Dialog.min.js"></script>
+
+
+
+
   <!--  leaflet-omnivore ライブラリ(GeoJSONを読み込むため) ●●●●要検討●●●●
   <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
 	-->
 
-  <script> //ここからJavascriptで地図の機能をつくっていく
+  <!-- 
+  <style>
+    /* 現在地表示divのCSS●●●●● */
+    .infostyle {
+      border: solid 1px;
+      background-color: azure;
+      border-radius: 10px;
+      opacity: 0.8;
+      padding: 5px;
+      font-size: 15px;
+      color: black;
+    }
+  </style>
+-->
+
+
+
+  <script> //***********ここからJavascriptで地図の機能をつくっていく**************
    //地図オブジェクトを入れる変数をグローバルにする
    var map;
 
@@ -73,7 +98,11 @@
        };
 	    */
       L.control.layers(baseMaps/*, overlayMaps*/).addTo(map);
-      gsi.addTo(map);
+      gsipale.addTo(map);
+      
+      //スケールバーを追加	
+      L.control.scale({imperial:false}).addTo(map);
+
 
 
       //Goejsonをマップに追加（ひとまず成功しているが、Objectの切り替えやラベル表示したい）
@@ -101,10 +130,63 @@
       L.geoJSON(data).addTo(map);
       });
       */
+  
 
+      //マップムーブイベント(中心座標表示用)
+      map.on('move', function(e) {
+        //crossMarker.setLatLng(mymap.getCenter()); //センタークロス表示用 
+        //マップムーブイベントで値を出力
+        outputPos(map);
+      });
+
+
+
+      //ダイアログ表示
+
+        // Dialog
+        var dialogoptions = {
+          size: [300,300],
+          minSize: [50,50],
+          maxSize: [400,350],
+          anchor: [75,150],
+          position: 'topleft',
+          initOpen: true
+        }
+ 
+        var contents = "<h1>この地図について</h1>";
+        contents += "<p>地図右上のひし形ボタンで背景地図を変更できます。<br>大芝の森がつくられてきた100年間の歴史を、年代別の地図や航空写真で見てみましょう。</p>";
+        contents += "<p>【注】<br>・「現在地へ」のGPS精度は微妙です。<br>・作りかけなので内容は適宜修正します。<br>・ご意見感想などあれば杉本まで。</p>";
+        contents += "<a href='https://www.facebook.com/sugimoto.kensuke' target='_blank'>南箕輪村地域おこし協力隊　杉本健輔</a>";
+ 
+        var dialog = L.control.dialog(dialogoptions)
+                  .setContent(contents)
+                  .addTo(map);
+ 
+        // Dialogのイベントを登録
+        //map.on('dialog:closed', function(e){ alert('dialog close event.'); });
+        
 
     }
-  
+    //*******************initここまで*************************
+
+
+    //現在の緯度・経度・倍率を取得して指定の要素に情報を出力する関数
+    function outputPos(map){
+      var pos = map.getCenter();
+      var zoom = map.getZoom();
+      //spanに出力
+     document.getElementById('lat_span').innerHTML = pos.lat;
+     document.getElementById('lng_span').innerHTML = pos.lng;
+     document.getElementById('zoom_span').innerHTML = zoom;
+     //inputに出力
+     //document.getElementById('lat_input').value = pos.lat;
+     // document.getElementById('lng_input').value = pos.lng;
+     //document.getElementById('zoom_input').value = zoom;
+    }
+ 
+
+
+
     //ホーム（大芝へ）
     function gohome(){
       map.setView([35.8844849, 137.9433395], 15); //大芝の座標
@@ -154,7 +236,9 @@
   </style>
 
 </head>
- 
+
+  <!-- ************************ここからbody*********************** -->
+
 <body onload="init()">
  <!-- ●タイトルと現在地ボタン● -->
   <div style="text-align:center;" >
@@ -164,6 +248,38 @@
     </div>
   <!-- ●地図を表示● -->
   <div id="mapcontainer" style="position:absolute;top: 45px;left:2px;right:2px;bottom:2px;"></div><!-- ここに地図を表示。隙間をあけて全画面。 -->
+
+
+  <!-- ダイアログ表示 -->
+  <script>
+        // Dialog
+        var dialogoptions = {
+          size: [300,200],
+          minSize: [50,50],
+          maxSize: [400,350],
+          anchor: [75,150],
+          position: 'topleft',
+          initOpen: true
+        }
+ 
+        var contents = "<p>この地図について</p>";
+        contents += "<p>右上のひし形ボタンで背景の地図を変更できます。年代別の地図や航空写真を収録しました。100年前（草地の地図記号）からの変遷を楽しんでください。 </p>";
+ 
+        contents += "<a href='https://www.facebook.com/sugimoto.kensuke' target='_blank'>南箕輪村地域おこし協力隊　杉本健輔</a>";
+ 
+        var dialog = L.control.dialog(dialogoptions)
+                  .setContent(contents)
+                  .addTo(map);
+ 
+        // Dialogのイベントを登録
+        map.on('dialog:closed', function(e){ alert('dialog close event.'); });
+
+  </script>
+
+
+
+
+
 </body>
  
 </html>
