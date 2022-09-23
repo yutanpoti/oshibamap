@@ -133,12 +133,13 @@
   
 
       //マップムーブイベント(中心座標表示用)
+      /*
       map.on('move', function(e) {
         //crossMarker.setLatLng(mymap.getCenter()); //センタークロス表示用 
         //マップムーブイベントで値を出力
         outputPos(map);
       });
-
+      */
 
 
       //ダイアログ表示
@@ -248,33 +249,6 @@
     </div>
   <!-- ●地図を表示● -->
   <div id="mapcontainer" style="position:absolute;top: 45px;left:2px;right:2px;bottom:2px;"></div><!-- ここに地図を表示。隙間をあけて全画面。 -->
-
-
-  <!-- ダイアログ表示 -->
-  <script>
-        // Dialog
-        var dialogoptions = {
-          size: [300,200],
-          minSize: [50,50],
-          maxSize: [400,350],
-          anchor: [75,150],
-          position: 'topleft',
-          initOpen: true
-        }
- 
-        var contents = "<p>この地図について</p>";
-        contents += "<p>右上のひし形ボタンで背景の地図を変更できます。年代別の地図や航空写真を収録しました。100年前（草地の地図記号）からの変遷を楽しんでください。 </p>";
- 
-        contents += "<a href='https://www.facebook.com/sugimoto.kensuke' target='_blank'>南箕輪村地域おこし協力隊　杉本健輔</a>";
- 
-        var dialog = L.control.dialog(dialogoptions)
-                  .setContent(contents)
-                  .addTo(map);
- 
-        // Dialogのイベントを登録
-        map.on('dialog:closed', function(e){ alert('dialog close event.'); });
-
-  </script>
 
 
 
