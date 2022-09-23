@@ -23,27 +23,9 @@
   <script src="https://cdn.jsdelivr.net/npm/leaflet-dialog@1.0.5/Leaflet.Dialog.min.js"></script>
 
 
-
-
   <!--  leaflet-omnivore ライブラリ(GeoJSONを読み込むため) ●●●●要検討●●●●
   <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
 	-->
-
-  <!-- 
-  <style>
-    /* 現在地表示divのCSS●●●●● */
-    .infostyle {
-      border: solid 1px;
-      background-color: azure;
-      border-radius: 10px;
-      opacity: 0.8;
-      padding: 5px;
-      font-size: 15px;
-      color: black;
-    }
-  </style>
--->
-
 
 
   <script> //***********ここからJavascriptで地図の機能をつくっていく**************
@@ -131,17 +113,6 @@
       });
       */
   
-
-      //マップムーブイベント(中心座標表示用)
-      /*
-      map.on('move', function(e) {
-        //crossMarker.setLatLng(mymap.getCenter()); //センタークロス表示用 
-        //マップムーブイベントで値を出力
-        outputPos(map);
-      });
-      */
-
-
       //ダイアログ表示
 
         // Dialog
@@ -169,24 +140,6 @@
 
     }
     //*******************initここまで*************************
-
-
-    //現在の緯度・経度・倍率を取得して指定の要素に情報を出力する関数
-    function outputPos(map){
-      var pos = map.getCenter();
-      var zoom = map.getZoom();
-      //spanに出力
-     document.getElementById('lat_span').innerHTML = pos.lat;
-     document.getElementById('lng_span').innerHTML = pos.lng;
-     document.getElementById('zoom_span').innerHTML = zoom;
-     //inputに出力
-     //document.getElementById('lat_input').value = pos.lat;
-     // document.getElementById('lng_input').value = pos.lng;
-     //document.getElementById('zoom_input').value = zoom;
-    }
- 
-
-
 
     //ホーム（大芝へ）
     function gohome(){
@@ -243,14 +196,12 @@
 <body onload="init()">
  <!-- ●タイトルと現在地ボタン● -->
   <div style="text-align:center;" >
-    <span style="font-size:20px;">大芝マップ10Test</span>
+    <span style="font-size:20px;">大芝マップ15Test</span>
     <button onClick="currentPos()">現在地へ</button>
     <button onClick="gohome()">大芝へ</button>
     </div>
   <!-- ●地図を表示● -->
   <div id="mapcontainer" style="position:absolute;top: 45px;left:2px;right:2px;bottom:2px;"></div><!-- ここに地図を表示。隙間をあけて全画面。 -->
-
-
 
 
 
