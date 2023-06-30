@@ -4,7 +4,7 @@
  
 <head>
   <meta charset="UTF-8">
-  <title>大芝歴史マップ</title>
+  <title>大芝マップ</title>
   <!-- ●表示幅を指定● -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -55,6 +55,16 @@
 	 	    { attribution: "<a href='https://ktgis.net/kjmapw/tilemapservice.html' target='_blank'>今昔マップon the web</a> contributors" });//今昔マップ伊那1911
        var kjmapina01 = L.tileLayer('https://ktgis.net/kjmapw/kjtilemap/ina/01/{z}/{x}/{-y}.png', 
 	 	    { attribution: "<a href='https://ktgis.net/kjmapw/tilemapservice.html' target='_blank'>今昔マップon the web</a> contributors" });//今昔マップ伊那1951
+       var kjmapina02 = L.tileLayer('https://ktgis.net/kjmapw/kjtilemap/ina/02/{z}/{x}/{-y}.png', 
+	 	    { attribution: "<a href='https://ktgis.net/kjmapw/tilemapservice.html' target='_blank'>今昔マップon the web</a> contributors" });//今昔マップ伊那1976
+       var kjmapina03 = L.tileLayer('https://ktgis.net/kjmapw/kjtilemap/ina/03/{z}/{x}/{-y}.png', 
+	 	    { attribution: "<a href='https://ktgis.net/kjmapw/tilemapservice.html' target='_blank'>今昔マップon the web</a> contributors" });//今昔マップ伊那1987
+       var kjmapina04 = L.tileLayer('https://ktgis.net/kjmapw/kjtilemap/ina/04/{z}/{x}/{-y}.png', 
+	 	    { attribution: "<a href='https://ktgis.net/kjmapw/tilemapservice.html' target='_blank'>今昔マップon the web</a> contributors" });//今昔マップ伊那1998
+
+      //シームレス地質図V2
+	     var seamless = L.tileLayer('https://gbank.gsj.jp/seamless/v2/api/1.2/tiles/{z}/{y}/{x}.png', 
+	 	    { attribution: "<a href='https://gbank.gsj.jp/seamless/v2/api/1.2/' target='_blank'>シームレス地質図V2</a> contributors" });//シームレス地質図V2
 
       /*
       //オーバーレイ用のタイルレイヤ
@@ -67,11 +77,15 @@
       var baseMaps = {
         "淡色地図": gsipale,
         "航空写真（最新）": gsiphot,
-		    "航空写真（1974-1978）": gsiphot1974,
+        "今昔マップ伊那1998": kjmapina04,
+        "今昔マップ伊那1987": kjmapina03,
+        "今昔マップ伊那1976": kjmapina02,
+        "航空写真（1974-1978）": gsiphot1974,
 		    "航空写真（1961-1969）": gsiphot1961,
         "今昔マップ伊那1951": kjmapina01,
         "今昔マップ伊那1911": kjmapina00,
-        "CS立体図（1mタイル）": naganocsver2
+        "CS立体図（1mタイル）": naganocsver2,
+        "シームレス地質図V2": seamless
       };
 	     /* オーバーレイは一旦なしで
        var overlayMaps = {
@@ -127,7 +141,7 @@
  
         var contents = "<h1>この地図について</h1>";
         contents += "<p>地図右上のひし形ボタンで背景地図を変更できます。<br>大芝の森がつくられてきた100年間の歴史を、年代別の地図や航空写真で見てみましょう。</p>";
-        contents += "<p>【注】<br>・「現在地へ」のGPS精度は微妙です。<br>・ご意見感想などあれば杉本まで。</p>";
+        contents += "<p>【注】<br>・「現在地へ」のGPS精度は微妙です。<br>・作りかけなので内容は適宜修正します。<br>・ご意見感想などあれば杉本まで。</p>";
         contents += "<a href='https://www.facebook.com/sugimoto.kensuke' target='_blank'>南箕輪村地域おこし協力隊　杉本健輔</a>";
  
         var dialog = L.control.dialog(dialogoptions)
@@ -196,7 +210,7 @@
 <body onload="init()">
  <!-- ●タイトルと現在地ボタン● -->
   <div style="text-align:center;" >
-    <span style="font-size:20px;">大芝歴史マップ</span>
+    <span style="font-size:20px;">大芝マップ15Test</span>
     <button onClick="currentPos()">現在地へ</button>
     <button onClick="gohome()">大芝へ</button>
     </div>
